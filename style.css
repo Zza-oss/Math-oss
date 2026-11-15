@@ -401,17 +401,27 @@ body > footer {
     opacity: 0.7;
 }
 @media (max-width: 600px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
+  nav {
+    flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+}
 
-        padding: 16px 20px;
-    }
-    nav ul {
-        flex-wrap: wrap;
-        gap: 12px 20px;
-    }
+nav ul {
+  order: 3;
+  flex: 0 0 100%;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+}
+
+.theme-toggle {
+  order: 2;
+  margin-left: auto;
+  min-height: 44px;
+  min-width: 44px;
+}
     nav a {
         font-size: 14px;
     }
@@ -608,14 +618,13 @@ body[data-theme="light"] {
 
   --border-accent: rgba(22, 139, 249, 0.3);
   --border-accent2: rgba(249, 115, 22, 0.3);
-
-
 }
 
 /* Light theme: area soal */
 body[data-theme="light"] .problem-content,
 body[data-theme="light"] .solution-content {
-  background-color: #fff7ed;
+  background-color: var(--backround-accent);
+  border-color: var(--border-accent);
 }
 
 /* Theme toggle button */
@@ -673,4 +682,20 @@ body > footer {
     background-color 0.3s ease,
     color 0.3s ease,
     border-color 0.3s ease;
+}
+/* Mobile touch interaction */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  touch-action: manipulation;
+}
+
+/* Hilangkan focus outline untuk tap,
+   tetapi tetap pertahankan untuk keyboard */
+button:focus:not(:focus-visible),
+a:focus:not(:focus-visible) {
+  outline: none;
 }
