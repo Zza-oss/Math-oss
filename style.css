@@ -14,14 +14,33 @@ html {
   --text-secondary: #94a3b8;
 
   --accent: #f97316;
-  --border: #334155;
+  --low-accent: #f97416c0;
+  --accent2: #168bf9;
+  --low-accent2: #168bf9b0;
+
+  --border: #66666693;
+
+  --shadow-accent: 0 0 20px rgba(249, 115, 22, 0.4);
+  --backround-accent: rgba(249, 115, 22, 0.12);
+  --border-accent: rgba(249, 115, 22, 0.3);
+
+  --shadow-accent2: 0 0 20px rgba(22, 139, 249, 0.4);
+  --backround-accent2: rgba(22, 139, 249, .12);
+  --border-accent2: rgba(22, 139, 249, 0.3);
+
+  --motion-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
 
   font-family: "inter", Arial, sans-serif;
   line-height: 1.6;
+}
+.brand > span:last-child > span {
+  color: var(--accent);
+  text-shadow: var(--shadow-accent);
 }
 header {
   border-bottom: 1px solid var(--border);
@@ -36,8 +55,10 @@ nav {
   justify-content: space-between;
 }
 nav h1 {
-  color: var(--accent);
+  color: var(--text-primary);
   font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
 }
 nav ul {
   display: flex;
@@ -49,18 +70,18 @@ nav a {
   color: var(--text-secondary);
   text-decoration: none;
 
-  transition: color 0.2s ease;
+  transition: color 0.2s var(--motion-ease-out);
 }
 nav a:hover {
   color: var(--accent);
 }
 #home {
-  min-height: 200px;
+  min-height: 500px;
   padding: 100px 24px;
 
   background: radial-gradient(
-    ellipse at center,
-    rgba(249, 115, 22, 0.08),
+    ellipse at 50% 15%,
+    var(--backround-accent),
     transparent 70%
   );
 
@@ -71,7 +92,7 @@ nav a:hover {
   text-align: center;
 }
 .hero-content {
-  max-width: 750px;
+  max-width: 500px;
   margin: 0 auto;
 }
 #home h2 {
@@ -79,6 +100,9 @@ nav a:hover {
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -2px;
+}
+#home span {
+    color: var(--accent)
 }
 #home p {
   max-width: 600px;
@@ -93,23 +117,27 @@ nav a:hover {
 
   padding: 14px 28px;
 
-    background-color: rgba(249, 115, 22, 0.12);
+    background-color:var(--backround-accent);
     color: var(--accent);
-   border: 1px solid rgba(249, 115, 22, 0.3);
+   border: 1px solid var(--border-accent);
 
   text-decoration: none;
   font-weight: 700;
 
   border-radius: 10px;
 
-  transition: 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.3s var(--motion-ease-out),
+    box-shadow 0.25s ease;
 }
 #home a:hover {
   background-color: var(--accent);
   color: var(--bg-primary);
   transform: translateY(-3px);
 
-  box-shadow: 0 0 20px rgba(249, 115, 22, 0.4);
+  box-shadow: var(--shadow-accent);
 }
 #questions {
   max-width: 1100px;
@@ -132,17 +160,22 @@ nav a:hover {
   font-size: clamp(30px, 4vw, 42px);
   margin-bottom: 12px;
 }
-.section-headingp:last-child {
+.section-heading p:last-child {
   color: var(--text-secondary);
   max-width: 600px;
   margin: 0 auto;
 }
 .question-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260, 2fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 24px;
 }
 .question-card {
+  background: radial-gradient(
+    ellipse at 100% 90%,
+    var(--backround-accent),
+    transparent 70%
+  );  
   background-color: var(--bg-secondary);
 
   border: 1px solid var(--border);
@@ -156,9 +189,12 @@ nav a:hover {
 
   min-height: 230px;
 
-  transition: transform 0.25s ease,
-  border-color 0.25s ease,
-  box-shadow 0.25s ease;
+  transition:
+    transform 0.35s var(--motion-ease-out),
+    border-color 0.25s ease,
+    box-shadow 0.35s var(--motion-ease-out),
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 .question-card span {
     color: var(--accent);
@@ -167,7 +203,7 @@ nav a:hover {
     font-weight: 700;
     letter-spacing: 1px;
 
-    background-color: rgba(249, 115, 22, 0.12);
+    background-color:var(--backround-accent);
 
     padding: 6px 10px;
     border-radius: 20px;
@@ -183,15 +219,14 @@ nav a:hover {
     font-size: 14px;
     margin-bottom: 24px;
 }
-.question-card a {
+.question-card button {
     display: inline-block;
 
     padding: 10px 16px;
 
-    background-color: rgba(249, 115, 22, 0.12);
+    background-color: var(--backround-accent);
     color: var(--accent);
 
-    border: 1px solid rgba(249, 115, 22, 0.3);
     border-radius: 8px;
 
     text-decoration: none;
@@ -200,23 +235,30 @@ nav a:hover {
 
     margin-top: auto;
 
-    transition: 0.25s ease;
+    cursor: pointer;
+    transition:
+        transform 0.25s var(--motion-ease-out),
+        box-shadow 0.25s ease,
+        background-color 0.2s ease;
 }
+.question-card:hover,
+.question-card:focus-within {
+    transform: translateY(-6px);
 
-.question-card a:hover {
-    background-color: var(--accent);
-    color: var(--bg-primary);
-
-    box-shadow: 0 0 18px rgba(249, 115, 22, 0.3);
-}
-.question-card:hover {
-    transform: translateY(-5px);
-
-    border-color: rgba(249, 115, 22, 0.5);
+    border-color: var(--low-accent);
 
     box-shadow:
         0 12px 30px rgba(0, 0, 0, 0.2),
         0 0 20px rgba(249, 115, 22, 0.08);
+}
+.question-card button:hover {
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    transform: translateY(-2px);
+}
+.question-card button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
 }
 .question-detail {
     max-width: 1100px;
@@ -245,6 +287,10 @@ nav a:hover {
     display: inline-block;
 
     color: var(--accent);
+    background-color:var(--backround-accent);
+
+    padding: 6px 10px;
+    border-radius: 20px;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 1px;
@@ -294,9 +340,9 @@ nav a:hover {
     color: var(--accent);
 }
 .answer-content {
-    background-color: rgba(249, 115, 22, 0.08);
+    background-color: var(--backround-accent);
 
-    border-color: rgba(249, 115, 22, 0.08);
+    border-color: var(--backround-accent);
     border-left: 3px solid var(--accent);
 }
 .answer-content h3 {
@@ -467,32 +513,48 @@ a:focus-visible {
 .step-progress-fill {
     height: 100%;
     width: 0%;
-    background: #f28c28;
+    background: var(--accent);
     border-radius: 10px;
-    transition: width 0.3 ease;
+    transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .step-control {
     display: flex;
     justify-content: space-between;
+    font-weight: 700;
     gap: 12px;
     margin-top: 24px;
+    margin-bottom: 24px;
 }
 .step-control button{
     padding: 10px 20px;
-    border: 1px solid transparent;
     border-radius: 10px;
     font: inherit;
     cursor: pointer;
-    transition: 0.2s ease;
+    transition:
+        transform 0.25s var(--motion-ease-out),
+        background-color 0.2s ease,
+        color 0.2s ease,
+        box-shadow 0.2s ease;
 }
 .next-step {
-    background: #f28c28;
-    color: white;
+    background:var(--backround-accent);
+    color: var(--accent);
+    border: 1px solid var(--border-accent);
+}
+.next-step:hover:not(:disabled){
+    background-color: var(--accent);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-accent);
 }
 .prev-step {
-    background: transparent;
-    border-color: currentColor !important;
-    color: inherit;
+    background: var(--backround-accent2);
+    border-color: var(--border-accent2) !important;
+    color: var(--accent2);
+}
+.prev-step:hover:not(:disabled){
+    background-color: var(--accent2);
+    color: var(--bg-primary);
+    box-shadow: var(--shadow-accent2);
 }
 .step-control button:not(:disabled):hover {
     transform: translateY(-2px);
@@ -502,7 +564,7 @@ a:focus-visible {
     cursor: not-allowed;
 }
 .step-control button:focus-visible {
-    outline: 2px solid #f28c28;
+    outline: 2px solid var(--accent);
     outline-offset: 3px;
 }
 .question-detail {
@@ -513,9 +575,102 @@ a:focus-visible {
     padding: 10px 16px;
     border: none;
     border-radius: 8px;
-    background: #f28c28;
+    background: #f99327;
     color: white;
     font: inherit;
     text-decoration: none;
     cursor: pointer;
+}
+.step-indicator {
+    padding-top: 20px;
+    font-size: 18px;
+    font-weight: 700;
+}
+body[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+
+  --text-primary: #172033;
+  --text-secondary: #64748b;
+
+  --accent2: #f97316;
+  --accent: #168bf9;
+  --border: #e2e8f0;
+
+  --low-accent: #168bf9b0;
+  --low-accent2: #f97416c0;
+
+  --shadow-accent: 0 0 20px rgba(22, 139, 249, 0.4);
+  --shadow-accent2: 0 0 20px rgba(249, 115, 22, 0.4);
+
+  --backround-accent:  rgba(22, 139, 249, .12);
+  --backround-accent2: rgba(249, 115, 22, 0.12);
+
+  --border-accent: rgba(22, 139, 249, 0.3);
+  --border-accent2: rgba(249, 115, 22, 0.3);
+
+
+}
+
+/* Light theme: area soal */
+body[data-theme="light"] .problem-content,
+body[data-theme="light"] .solution-content {
+  background-color: #fff7ed;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  padding: 9px 14px;
+
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+
+  border: 1px solid var(--border);
+  border-radius: 30px;
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition:
+    transform 0.25s var(--motion-ease-out),
+    border-color 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.theme-toggle-icon {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Smooth theme transition */
+body,
+header,
+#home,
+.solution-card,
+.problem-content,
+.about-content,
+body > footer {
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
 }

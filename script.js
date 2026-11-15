@@ -38,7 +38,7 @@ const questions = [
       },
     ],
   },
-];
+]
 
 let selectedQuestionIndex = 0;
 let currentIndex = 0;
@@ -83,14 +83,18 @@ function tampilkanLangkah() {
   nextButton.disabled = currentIndex === steps.length - 1;
   progressFill.style.width = `${((currentIndex + 1) / steps.length) * 100}%`;
 
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
   stepContent.animate(
     [
       { opacity: 0, transform: "translateY(8px)" },
       { opacity: 1, transform: "translateY(0)" },
     ],
     {
-      duration: 250,
-      easing: "ease-out",
+      duration: 280,
+      easing: "cubic-bezier(0.22, 1, 0.36, 1)",
     },
   );
 }
@@ -130,3 +134,58 @@ questionGrid.addEventListener("click", (event) => {
 tampilkanDaftarSoal();
 tampilkanSoal();
 tampilkanLangkah();
+
+
+// ================================
+// THEME SWITCH
+// ================================
+
+const themeToggle = document.querySelector(".theme-toggle");
+const themeIcon = document.querySelector(".theme-toggle-icon");
+const themeLabel = document.querySelector(".theme-toggle-label");
+
+// Ambil tema yang pernah dipilih
+let savedTheme = "dark";
+
+try {
+  const storedTheme = localStorage.getItem("mathspace-theme");
+
+  if (storedTheme === "light" || storedTheme === "dark") {
+    savedTheme = storedTheme;
+  }
+} catch (error) {
+  console.warn("Theme preference could not be loaded.");
+}
+
+// Terapkan tema
+function applyTheme(theme) {
+  document.body.dataset.theme = theme;
+
+  const isLight = theme === "light";
+
+  themeIcon.textContent = isLight ? "☾" : "☀";
+  themeLabel.textContent = isLight ? "Dark mode" : "Light mode";
+
+  themeToggle.setAttribute("aria-pressed", String(isLight));
+}
+
+// Terapkan tema awal
+applyTheme(savedTheme);
+
+// Ketika tombol diklik
+themeToggle.addEventListener("click", () => {
+  const currentTheme = document.body.dataset.theme;
+
+  const nextTheme = currentTheme === "dark"
+    ? "light"
+    : "dark";
+
+  applyTheme(nextTheme);
+
+  // Simpan pilihan pengguna
+  try {
+    localStorage.setItem("mathspace-theme", nextTheme);
+  } catch (error) {
+    console.warn("Theme preference could not be saved.");
+  }
+});
