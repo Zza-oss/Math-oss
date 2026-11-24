@@ -1,118 +1,100 @@
 <!doctype html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MathSpace - Mathematics Learning</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <header>
-      <nav>
-        <h1 class="brand">
-          <span>Math<span>Space</span></span>
-        </h1>
-        <ul>
-          <li><a href="#home">Home</a></li>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Pelajari matematika melalui pembahasan soal yang lengkap, sistematis, dan mudah dipahami." />
+  <title>MathSpace — Belajar Matematika</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"]],
+        displayMath: [["\\[", "\\]"]],
+      },
+      startup: {
+        typeset: false,
+      },
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div id="library-page">
+    <header class="navbar">
+      <nav aria-label="Navigasi utama">
+        <a class="brand" href="#home" aria-label="MathSpace, ke halaman utama">
+          Math<span>Space</span>
+        </a>
+
+        <button class="menu-toggle" type="button" aria-label="Buka menu navigasi" aria-expanded="false"
+          aria-controls="nav-menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul id="nav-menu">
+          <li><a href="#home">Beranda</a></li>
           <li><a href="#questions">Daftar Soal</a></li>
-          <li><a href="#about">About</a></li>
+          <li><a href="#about">Tentang</a></li>
         </ul>
-        <button
-          class="theme-toggle"
-          type="button"
-          aria-label="Toggle light and dark theme"
-          aria-pressed="false"
-        >
+
+        <button class="theme-toggle" type="button" aria-label="Ganti tema" aria-pressed="false">
           <span class="theme-toggle-icon" aria-hidden="true">☀</span>
-          <span class="theme-toggle-label">Light mode</span>
+          <span class="theme-toggle-label">Mode terang</span>
         </button>
       </nav>
     </header>
 
     <main>
-      <section id="home">
+      <section id="home" aria-labelledby="hero-title">
         <div class="hero-content">
-          <h2>Understand Mathematics<span> Step by Step.</span></h2>
-
+          <p class="eyebrow">MATHEMATICS</p>
+          <h1 id="hero-title">Pahami matematika, <span>Step by Step.</span></h1>
           <p>
-            Pelajari berbagai persoalan matematika melalui pembahasan yang mudah
-            dipahami, sistematis, dan interaktif.
+            Jelajahi pembahasan matematika, lengkap dengan rumus,
+            visual, dan kesimpulan yang membantu konsep lebih mudah dipahami.
           </p>
+          <a href="#questions">Jelajahi daftar soal <span aria-hidden="true">→</span></a>
+        </div>
 
-          <a href="#questions">Explore Questions</a>
+        <div class="hero-visual" aria-hidden="true">
+          <span class="hero-visual__symbol">∑</span>
+          <span class="hero-visual__orbit hero-visual__orbit--one"></span>
+          <span class="hero-visual__orbit hero-visual__orbit--two"></span>
+          <span class="hero-visual__point"></span>
         </div>
       </section>
 
-      <section id="questions">
+      <section id="questions" aria-labelledby="questions-title">
         <div class="section-heading">
-          <p>QUESTION LIBRARY</p>
-          <h2>Explore Mathematics</h2>
-          <p>Temukan berbagai soal matematika beserta pembahasan lengkapnya.</p>
-        </div>
-
-        <div class="question-grid"></div>
-      </section>
-
-      <section id="question-01" class="question-detail">
-        <article class="solution-card">
-          <header class="solution-header">
-            <span class="question-number">QUESTION 01</span>
-            <h2 class="question-title">Judul Soal Pertama</h2>
-          </header>
-
-          <div class="problem-content">
-            <h3>Soal</h3>
-            <p class="problem-description">
-              Tuliskan soal matematika dari guru di sini.
-            </p>
+          <div>
+            <p class="eyebrow">PERPUSTAKAAN SOAL</p>
+            <h2 id="questions-title">Belajar dari pembahasan</h2>
           </div>
-
-          <div class="step-viewer">
-            <div class="step-indicator">
-              <span>LANGKAH PENYELESAIAN</span>
-
-              <span>
-                <span class="current-step">1</span> /
-                <span class="total-steps">3</span>
-              </span>
-            </div>
-
-            <div class="step-progress">
-              <div class="step-progress-fill"></div>
-            </div>
-
-            <div class="step-content">
-              <h3 class="step-title">Langkah 1</h3>
-
-              <p class="step-description">Penjelasan langkah pertama.</p>
-            </div>
-
-            <div class="step-control">
-              <button class="prev-step" type="button">Sebelumnya</button>
-
-              <button class="next-step" type="button">Selanjutnya</button>
-            </div>
-          </div>
-
-          <div class="answer-content">
-            <h3>Kesimpulan</h3>
-            <p class="answer-description"></p>
-          </div>
-        </article>
-      </section>
-
-      <section id="about">
-        <div class="about-content">
-          <h2>About MathSpace</h2>
-
           <p>
-            MathSpace adalah platform pembelajaran matematika yang menyediakan
-            dokumentasi penyelesaian soal secara sistematis dan interaktif.
+            Pilih soal untuk melihat penjelasan lengkap dan visualisasi
+            konsepnya.
           </p>
+        </div>
+        <div class="question-grid" aria-live="polite"></div>
+      </section>
 
+      <section id="about" aria-labelledby="about-title">
+        <div class="about-content">
+          <p class="eyebrow">TENTANG MATHSPACE</p>
+          <h2 id="about-title">Platform belajar</h2>
           <p>
-            Tujuannya adalah membantu pelajar memahami konsep matematika melalui
-            penjelasan langkah demi langkah.
+            MathSpace menyajikan pembahasan matematika secara sistematis agar
+            pelajar dapat memahami alasan di balik setiap langkah.
+          </p>
+          <p>
+            Setiap topik dirancang sebagai materi belajar, bukan kuis—baca,
+            amati, dan pahami konsepnya.
           </p>
         </div>
       </section>
@@ -120,14 +102,65 @@
 
     <footer>
       <div class="footer-content">
-        <h2>MathSpace</h2>
-
-        <p>Making Mathematics Easier to Understand.</p>
-
-        <p>&copy; 2026 MathSpace. All Rights Reserved.</p>
+        <div class="footer-branding">
+          <a class="brand" href="#home">Math<span>Space</span></a>
+          <p>Making mathematics easier to understand.</p>
+        </div>
+        <nav class="footer-nav" aria-label="Navigasi footer">
+          <a href="#home">Beranda</a>
+          <a href="#questions">Daftar Soal</a>
+          <a href="#about">Tentang</a>
+        </nav>
+        <p class="footer-copyright">&copy; 2026 MathSpace. All rights reserved.</p>
       </div>
     </footer>
+  </div>
 
-    <script src="script.js"></script>
-  </body>
+  <main id="presentation-section" class="presentation-section" hidden>
+    <header class="presentation-section__heading">
+      <button id="close-presentation" class="presentation-back" type="button">
+        <span aria-hidden="true">←</span> Kembali ke perpustakaan
+      </button>
+      <div class="presentation-section__heading-copy">
+        <p id="presentation-question-number">PEMBAHASAN SOAL</p>
+        <h1 id="presentation-question-title" tabindex="-1">Pembahasan</h1>
+      </div>
+    </header>
+    <div id="presentation-preview" aria-live="polite"></div>
+  </main>
+
+  <nav class="presentation-navigation" aria-label="Navigasi pembahasan" hidden>
+    <div class="presentation-navigation__inner">
+      <div class="presentation-progress" role="progressbar" aria-label="Progres pembahasan" aria-valuemin="0"
+        aria-valuemax="100" aria-valuenow="0">
+        <div id="presentation-progress-fill"></div>
+      </div>
+
+      <div class="presentation-controls">
+        <button id="question-list-toggle" type="button" aria-expanded="false" aria-controls="question-list-panel">
+          <span aria-hidden="true">☷</span>
+          Daftar Soal
+        </button>
+        <div class="presentation-controls__right">
+          <button id="previous-slide" type="button" aria-label="Soal sebelumnya">
+            ← Sebelumnya
+          </button>
+          <span id="slide-counter" aria-live="polite">Soal 1 / 5</span>
+          <button id="next-slide" type="button" aria-label="Soal berikutnya">
+            Berikutnya →
+          </button>
+        </div>
+      </div>
+
+      <div id="question-list-panel" class="question-list-panel" hidden>
+        <h2>Daftar Soal</h2>
+        <p>Pilih soal yang ingin dipelajari.</p>
+        <div id="question-list"></div>
+      </div>
+    </div>
+  </nav>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+
 </html>
