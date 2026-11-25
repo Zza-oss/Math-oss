@@ -35,6 +35,7 @@ const questionIndexes = new Map(
 let presentationNavigation = null;
 let presentationInitialization = null;
 let routeRequest = 0;
+const routeStateKey = "mathSpaceRoute";
 
 function getQuestionTitle(question, index) {
   return question.slides?.[0]?.title || question.title || `Soal ${index + 1}`;
@@ -51,7 +52,6 @@ function createQuestionCard({ question }, index) {
     "Lihat pembahasan lengkap soal ini.";
   const card = document.createElement("article");
   card.className = "question-card";
-  card.tabIndex = 0;
   card.dataset.number = String(index + 1).padStart(2, "0");
 
   const label = document.createElement("span");
@@ -84,17 +84,45 @@ function renderQuestionCards() {
   );
 }
 
-function setHash(hash) {
-  if (window.location.hash !== hash) {
-    window.location.hash = hash;
-  }
+function getRouteState() {
+  const state = window.history.state;
+  return state && typeof state === "object" && !Array.isArray(state)
+    ? state[routeStateKey]
+    : null;
+}
+
+function createHistoryState(route) {
+  const state = window.history.state;
+  const currentState =
+    state && typeof state === "object" && !Array.isArray(state) ? state : {};
+  return { ...currentState, [routeStateKey]: route };
+}
+
+function pushHistoryRoute(route, hash) {
+  window.history.pushState(createHistoryState(route), "", hash);
+}
+
+function replaceHistoryRoute(route, hash = window.location.href) {
+  window.history.replaceState(createHistoryState(route), "", hash);
+}
+
+function getQuestionHash(questionId) {
+  return `#question/${encodeURIComponent(questionId)}`;
 }
 
 function updateQuestionHash(_index, slide) {
   const questionId = slide?.dataset.questionId;
-  if (questionId && questionId !== getQuestionIdFromHash()) {
-    setHash(`#question/${questionId}`);
+  if (!questionId) return;
+
+  const hash = getQuestionHash(questionId);
+  const route = getRouteState();
+  if (route?.questionId !== questionId) {
+    updatePresentationHeading(questionId);
   }
+  if (window.location.hash !== hash || route?.questionId !== questionId) {
+    replaceHistoryRoute({ type: "presentation", questionId }, hash);
+  }
+  window.scrollTo({ top: 0, behavior: "auto" });
 }
 
 function getQuestionIdFromHash() {
@@ -169,10 +197,7 @@ function updatePresentationHeading(questionId) {
 
 async function showQuestion(questionId) {
   const questionIndex = questionIndexes.get(questionId);
-  if (questionIndex === undefined) {
-    setHash("#questions");
-    return;
-  }
+  if (questionIndex === undefined) return;
 
   const currentRequest = ++routeRequest;
   libraryPage.hidden = true;
@@ -230,13 +255,58 @@ function showLibrary() {
   }
 }
 
-function routeFromHash() {
+function routeFromHistory() {
   const questionId = getQuestionIdFromHash();
-  if (questionId) {
+  const route = getRouteState();
+
+  if (questionId && questionIndexes.has(questionId)) {
+    if (route?.type !== "presentation") {
+      replaceHistoryRoute({ type: "library" }, "#questions");
+      pushHistoryRoute(
+        { type: "presentation", questionId },
+        getQuestionHash(questionId),
+      );
+    } else if (route.questionId !== questionId) {
+      replaceHistoryRoute(
+        { type: "presentation", questionId },
+        getQuestionHash(questionId),
+      );
+    }
+
     void showQuestion(questionId);
     return;
   }
+
+  if (window.location.hash.startsWith("#question/")) {
+    replaceHistoryRoute({ type: "library" }, "#questions");
+  } else if (route?.type !== "library") {
+    replaceHistoryRoute({ type: "library" });
+  }
+
   showLibrary();
+}
+
+function openQuestion(questionId) {
+  if (!questionIndexes.has(questionId)) {
+    console.warn(`Soal ${questionId} tidak ditemukan.`);
+    return;
+  }
+
+  pushHistoryRoute(
+    { type: "presentation", questionId },
+    getQuestionHash(questionId),
+  );
+  routeFromHistory();
+}
+
+function closePresentation() {
+  if (getRouteState()?.type === "presentation") {
+    window.history.back();
+    return;
+  }
+
+  replaceHistoryRoute({ type: "library" }, "#questions");
+  routeFromHistory();
 }
 
 questionGrid.addEventListener("click", (event) => {
@@ -244,14 +314,14 @@ questionGrid.addEventListener("click", (event) => {
   if (!(target instanceof Element)) return;
   const button = target.closest(".open-question");
   if (!button || !questionGrid.contains(button)) return;
-  setHash(`#question/${encodeURIComponent(button.dataset.questionId)}`);
+  openQuestion(button.dataset.questionId);
 });
 
-closePresentationButton.addEventListener("click", () => setHash("#questions"));
-window.addEventListener("hashchange", routeFromHash);
+closePresentationButton.addEventListener("click", closePresentation);
+window.addEventListener("popstate", routeFromHistory);
 
 renderQuestionCards();
-routeFromHash();
+routeFromHistory();
 
 const themeToggle = document.querySelector(".theme-toggle");
 const themeIcon = document.querySelector(".theme-toggle-icon");
@@ -295,6 +365,7 @@ function closeMenu() {
   navMenu.classList.remove("active");
   menuToggle.classList.remove("open");
   menuToggle.setAttribute("aria-expanded", "false");
+  menuToggle.setAttribute("aria-label", "Buka menu navigasi");
 }
 
 menuToggle.addEventListener("click", () => {
@@ -302,6 +373,10 @@ menuToggle.addEventListener("click", () => {
   navMenu.classList.toggle("active", isOpen);
   menuToggle.classList.toggle("open", isOpen);
   menuToggle.setAttribute("aria-expanded", String(isOpen));
+  menuToggle.setAttribute(
+    "aria-label",
+    isOpen ? "Tutup menu navigasi" : "Buka menu navigasi",
+  );
 });
 
 navMenu.addEventListener("click", (event) => {

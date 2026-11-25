@@ -268,7 +268,7 @@ export const assessment02 = {
 
                 paragraph(
                     "Vito, ayah, ibu, serta dua adiknya, Rina dan Rani akan makan malam bersama di sebuah restoran. Mereka duduk di kursi yang mengelilingi meja bundar. Banyak kursi yang ada di meja tersebut sama dengan banyak anggota keluarga Vito."
-                ),22
+                )
             ],
 
             questions: [
@@ -704,6 +704,238 @@ export const assessment02 = {
 
                                 paragraph(
                                     "Jawaban yang sesuai adalah D. 14.400."
+                                )
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        // ======================================
+        // SECTION 4 — PELUANG MENGAMBIL BOLA
+        // ======================================
+        {
+            id: "section-ball-probability",
+            title: "Peluang Mengambil Bola",
+            sharedContentLabel: "Informasi Pendukung Soal 6 dan 7",
+            sharedContentLayout: "stack",
+            sharedContent: [
+                paragraph(
+                    "Tasya memasukkan 20 bola berbagai warna ke dalam kotak. Terdapat 7 bola biru, 4 bola merah, dan 6 bola kuning. Sisanya adalah bola hijau. Tasya mengambil bola secara acak."
+                ),
+                formula(
+                    String.raw`n_{\text{hijau}}=20-7-4-6=3`
+                ),
+                table(
+                    ["Warna bola", "Jumlah"],
+                    [
+                        ["Biru", "7"],
+                        ["Merah", "4"],
+                        ["Kuning", "6"],
+                        ["Hijau", "3"],
+                        ["Total", "20"]
+                    ]
+                )
+            ],
+            questions: [
+                {
+                    id: "question-06",
+                    number: 6,
+                    usesSharedContent: true,
+                    slides: [
+                        {
+                            id: "q6-complete",
+                            type: "question",
+                            template: "question",
+                            title: "Soal 6 — Peluang Mengambil Bola Biru atau Hijau (Asesmen 2, Soal 1)",
+                            blocks: [
+                                paragraph(
+                                    "Tentukan peluang Tasya mengambil bola biru atau hijau. Pilihan jawaban yang benar adalah E."
+                                ),
+                                heading("Menghitung Peluang Bola Biru atau Hijau"),
+                                paragraph(
+                                    "Karena hanya satu bola yang diambil, kejadian mengambil bola biru dan mengambil bola hijau saling lepas."
+                                ),
+                                formula(
+                                    String.raw`P(B\cup H)=P(B)+P(H)`
+                                ),
+                                formula(
+                                    String.raw`P(B\cup H)=\frac{7}{20}+\frac{3}{20}`
+                                ),
+                                formula(
+                                    String.raw`P(B\cup H)=\frac{10}{20}=\boxed{\frac{1}{2}}`
+                                ),
+                                heading("Kesimpulan"),
+                                paragraph(
+                                    "Jadi, peluang Tasya mengambil bola biru atau hijau adalah 1/2. Jawaban pilihan ganda: E."
+                                )
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "question-07",
+                    number: 7,
+                    usesSharedContent: true,
+                    slides: [
+                        {
+                            id: "q7-complete",
+                            type: "question",
+                            template: "question",
+                            title: "Soal 7 — Peluang Mengambil Tiga Bola Kuning (Asesmen 2, Soal 3)",
+                            blocks: [
+                                paragraph(
+                                    "Tasya mengambil tiga bola sekaligus secara acak. Tentukan peluang ketiga bola yang terambil berwarna kuning."
+                                ),
+                                heading("Menghitung Peluang Tiga Bola Kuning"),
+                                paragraph(
+                                    "Gunakan kombinasi karena tiga bola diambil sekaligus, sehingga urutan pengambilan tidak diperhatikan."
+                                ),
+                                formula(
+                                    String.raw`\binom{20}{3}=1.140`
+                                ),
+                                paragraph(
+                                    "Banyak cara memilih tiga bola dari enam bola kuning adalah:"
+                                ),
+                                formula(
+                                    String.raw`\binom{6}{3}=20`
+                                ),
+                                paragraph(
+                                    "Peluang diperoleh dari banyak pilihan tiga bola kuning dibagi banyak pilihan tiga bola dari seluruh kotak."
+                                ),
+                                formula(
+                                    String.raw`P(\text{ketiganya kuning})=\frac{\binom{6}{3}}{\binom{20}{3}}`
+                                ),
+                                formula(
+                                    String.raw`P=\frac{20}{1.140}=\boxed{\frac{1}{57}}`
+                                ),
+                                heading("Kesimpulan"),
+                                paragraph(
+                                    "Jadi, peluang ketiga bola yang diambil sekaligus semuanya berwarna kuning adalah 1/57."
+                                )
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        // ======================================
+        // SECTION 5 — PELUANG BANJIR DI KOTA
+        // ======================================
+        {
+            id: "section-city-flood",
+            title: "Peluang Banjir di Tiga Kota",
+            sharedContentLabel: "Informasi Pendukung Soal 8 dan 9",
+            sharedContentLayout: "stack",
+            sharedContent: [
+                paragraph(
+                    "Seorang ahli geologi mengatakan bahwa dalam lima tahun ke depan, di beberapa kota akan terjadi banjir. Peluang banjir di setiap kota adalah sebagai berikut."
+                ),
+                table(
+                    ["Kota", "Peluang banjir"],
+                    [
+                        ["Kota X", "2/3"],
+                        ["Kota Y", "1/4"],
+                        ["Kota Z", "1/2"]
+                    ]
+                ),
+                paragraph(
+                    "Untuk mengerjakan soal ini, kejadian banjir antarkota diasumsikan saling bebas. Independensi ini merupakan asumsi pengerjaan karena tidak dinyatakan secara eksplisit pada informasi sumber."
+                )
+            ],
+            questions: [
+                {
+                    id: "question-08",
+                    number: 8,
+                    usesSharedContent: true,
+                    slides: [
+                        {
+                            id: "q8-complete",
+                            type: "question",
+                            template: "question",
+                            title: "Soal 8 — Memeriksa Peluang Banjir di Tiga Kota (Asesmen 2, Soal 4)",
+                            blocks: [
+                                paragraph(
+                                    "Tentukan benar atau salah untuk setiap pernyataan berikut tentang peluang banjir di kota-kota tersebut."
+                                ),
+                                list([
+                                    "Peluang di kota X dan kota Y terjadi banjir sebesar 1/6.",
+                                    "Peluang di kota X dan kota Z terjadi banjir sebesar 1/4.",
+                                    "Peluang di kota Y dan kota Z terjadi banjir sebesar 1/8.",
+                                    "Peluang di kota X dan kota Y terjadi banjir lebih kecil daripada kota X dan kota Z.",
+                                    "Peluang di kota X dan kota Z terjadi banjir lebih besar daripada kota Y dan kota Z."
+                                ], true),
+                                heading("Menghitung Peluang Banjir Bersama"),
+                                paragraph(
+                                    "Dengan asumsi kejadian banjir antarkota saling bebas, peluang dua kota mengalami banjir bersama dihitung menggunakan aturan perkalian."
+                                ),
+                                formula(
+                                    String.raw`P(X\cap Y)=\frac{2}{3}\times\frac{1}{4}=\frac{1}{6}`
+                                ),
+                                formula(
+                                    String.raw`P(X\cap Z)=\frac{2}{3}\times\frac{1}{2}=\frac{1}{3}`
+                                ),
+                                formula(
+                                    String.raw`P(Y\cap Z)=\frac{1}{4}\times\frac{1}{2}=\frac{1}{8}`
+                                ),
+                                formula(
+                                    String.raw`\frac{1}{6}<\frac{1}{3}`
+                                ),
+                                formula(
+                                    String.raw`\frac{1}{3}>\frac{1}{8}`
+                                ),
+                                heading("Evaluasi Pernyataan"),
+                                table(
+                                    ["Pernyataan", "Hasil perhitungan", "Status"],
+                                    [
+                                        ["1. Kota X dan kota Y sebesar 1/6", "1/6", "Benar"],
+                                        ["2. Kota X dan kota Z sebesar 1/4", "1/3", "Salah"],
+                                        ["3. Kota Y dan kota Z sebesar 1/8", "1/8", "Benar"],
+                                        ["4. X dan Y lebih kecil daripada X dan Z", "1/6 dibanding 1/3", "Benar"],
+                                        ["5. X dan Z lebih besar daripada Y dan Z", "1/3 dibanding 1/8", "Benar"]
+                                    ]
+                                ),
+                                heading("Kesimpulan"),
+                                paragraph(
+                                    "Urutan status kelima pernyataan adalah Benar, Salah, Benar, Benar, dan Benar."
+                                )
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: "question-09",
+                    number: 9,
+                    usesSharedContent: true,
+                    slides: [
+                        {
+                            id: "q9-complete",
+                            type: "question",
+                            template: "question",
+                            title: "Soal 9 — Peluang Ketiga Kota Terjadi Banjir (Asesmen 2, Soal 5)",
+                            blocks: [
+                                paragraph(
+                                    "Tentukan peluang ketiga kota X, Y, dan Z mengalami banjir."
+                                ),
+                                heading("Menghitung Peluang Ketiga Kota Banjir"),
+                                paragraph(
+                                    "Dengan asumsi ketiga kejadian saling bebas, gunakan aturan perkalian peluang."
+                                ),
+                                formula(
+                                    String.raw`P(X\cap Y\cap Z)=P(X)\times P(Y)\times P(Z)`
+                                ),
+                                formula(
+                                    String.raw`P=\frac{2}{3}\times\frac{1}{4}\times\frac{1}{2}`
+                                ),
+                                formula(
+                                    String.raw`P=\frac{2}{24}`
+                                ),
+                                formula(
+                                    String.raw`P=\boxed{\frac{1}{12}}`
+                                ),
+                                heading("Kesimpulan"),
+                                paragraph(
+                                    "Jadi, dengan asumsi kejadian banjir di ketiga kota saling bebas, peluang kota X, Y, dan Z semuanya mengalami banjir adalah 1/12."
                                 )
                             ]
                         }

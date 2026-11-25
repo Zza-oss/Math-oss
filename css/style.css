@@ -41,7 +41,7 @@ body[data-theme="light"] {
   --bg-secondary: #fff;
   --text-primary: #17243b;
   --text-secondary: #53647e;
-  --text-accent: var(--text-primary);
+  --text-accent: var(--accent);
   --accent-soft: rgb(22 139 249 / 9%);
   --accent-border: rgb(22 139 249 / 34%);
   --border: rgb(31 56 91 / 14%);
@@ -462,7 +462,7 @@ button:focus-visible {
   font-size: 118px;
   font-weight: 800;
   line-height: 1;
-  opacity: 0.045;
+  opacity: 0.2;
   pointer-events: none;
 }
 
@@ -470,12 +470,7 @@ button:focus-visible {
 .question-card:focus-within {
   transform: translateY(-4px);
   border-color: var(--accent-border);
-  box-shadow: var(--shadow), 0 0 24px rgb(22 139 249 / 8%);
-}
-
-.question-card:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 3px;
+  box-shadow: var(--shadow), 0 0 24px rgb(22 139 249 / 25%);
 }
 
 .question-card > span {
@@ -528,11 +523,10 @@ button:focus-visible {
   font-weight: 750;
   cursor: pointer;
   opacity: 0;
-  visibility: hidden;
+  pointer-events: none;
   transform: translateY(5px);
   transition:
     opacity 200ms ease,
-    visibility 200ms ease,
     transform 240ms var(--motion-ease-out),
     color 180ms ease;
 }
@@ -546,7 +540,7 @@ button:focus-visible {
 .question-card:hover .open-question,
 .question-card:focus-within .open-question {
   opacity: 1;
-  visibility: visible;
+  pointer-events: auto;
   transform: translateY(0);
 }
 
@@ -557,7 +551,7 @@ button:focus-visible {
 @media (hover: none), (pointer: coarse) {
   .question-card .open-question {
     opacity: 1;
-    visibility: visible;
+    pointer-events: auto;
     transform: none;
   }
 }
