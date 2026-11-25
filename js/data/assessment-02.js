@@ -774,6 +774,90 @@ export const assessment02 = {
                     ]
                 },
                 {
+                    id: "question-10",
+                    number: 7,
+                    slides: [
+                        {
+                            id: "q10-complete",
+                            type: "question",
+                            template: "question",
+                            title: "Soal 7 — Peluang Pengambilan Dua Bola (Asesmen 2, Soal 2)",
+                            blocks: [
+                                paragraph(
+                                    "Tasya memiliki bola-bola dengan jumlah seperti pada tabel dan mengambil dua bola sekaligus secara acak. Tentukan peluang untuk setiap kejadian berikut."
+                                ),
+                                table(
+                                    ["Warna bola", "Jumlah"],
+                                    [
+                                        ["Biru", "7"],
+                                        ["Merah", "4"],
+                                        ["Kuning", "6"],
+                                        ["Hijau", "3"],
+                                        ["Total", "20"]
+                                    ]
+                                ),
+                                list([
+                                    "Kedua bola berwarna biru.",
+                                    "Kedua bola berwarna merah.",
+                                    "Kedua bola berwarna kuning.",
+                                    "Terambil bola merah dan bola hijau.",
+                                    "Terambil bola kuning dan bola hijau."
+                                ], true),
+                                heading("Pilihan Jawaban pada Buku"),
+                                list([
+                                    "1/38",
+                                    "3/38",
+                                    "2/95",
+                                    "3/100",
+                                    "7/190",
+                                    "21/190",
+                                    "9/200"
+                                ]),
+                                heading("Menghitung Banyak Pasangan"),
+                                paragraph(
+                                    "Karena dua bola diambil sekaligus, urutan tidak diperhatikan. Banyak pasangan yang dapat dibentuk dari 20 bola dihitung dengan kombinasi."
+                                ),
+                                formula(
+                                    String.raw`\binom{20}{2}=\frac{20!}{2!(20-2)!}=\frac{20\times19}{2}=190`
+                                ),
+                                heading("Menghitung Peluang Setiap Kejadian"),
+                                paragraph("1. Kedua bola berwarna biru:"),
+                                formula(
+                                    String.raw`P(\text{dua biru})=\frac{\binom{7}{2}}{\binom{20}{2}}=\frac{21}{190}`
+                                ),
+                                paragraph("2. Kedua bola berwarna merah:"),
+                                formula(
+                                    String.raw`P(\text{dua merah})=\frac{\binom{4}{2}}{\binom{20}{2}}=\frac{6}{190}=\frac{3}{95}`
+                                ),
+                                paragraph("3. Kedua bola berwarna kuning:"),
+                                formula(
+                                    String.raw`P(\text{dua kuning})=\frac{\binom{6}{2}}{\binom{20}{2}}=\frac{15}{190}=\frac{3}{38}`
+                                ),
+                                paragraph(
+                                    "4. Satu bola merah dan satu bola hijau: pilih satu dari 4 bola merah dan satu dari 3 bola hijau."
+                                ),
+                                formula(
+                                    String.raw`P(\text{merah dan hijau})=\frac{4\times3}{190}=\frac{12}{190}=\frac{6}{95}`
+                                ),
+                                paragraph(
+                                    "5. Satu bola kuning dan satu bola hijau: pilih satu dari 6 bola kuning dan satu dari 3 bola hijau."
+                                ),
+                                formula(
+                                    String.raw`P(\text{kuning dan hijau})=\frac{6\times3}{190}=\frac{18}{190}=\frac{9}{95}`
+                                ),
+                                heading("Catatan Verifikasi Pilihan Jawaban"),
+                                paragraph(
+                                    "Hasil perhitungan berdasarkan jumlah bola pada soal tidak seluruhnya tersedia pada pilihan jawaban tercetak. Dari lima hasil tersebut, hanya 21/190 dan 3/38 yang ditemukan pada pilihan. Tiga hasil lainnya, yaitu 3/95, 6/95, dan 9/95, tidak tersedia. Pilihan jawaban dipertahankan sesuai sumber dan tidak dipasangkan dengan hasil yang berbeda."
+                                ),
+                                heading("Kesimpulan"),
+                                paragraph(
+                                    "Peluang kedua bola biru adalah 21/190, kedua bola merah 3/95, kedua bola kuning 3/38, bola merah dan hijau 6/95, serta bola kuning dan hijau 9/95."
+                                )
+                            ]
+                        }
+                    ]
+                },
+                {
                     id: "question-07",
                     number: 7,
                     usesSharedContent: true,

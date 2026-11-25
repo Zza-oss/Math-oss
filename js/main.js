@@ -38,7 +38,11 @@ let routeRequest = 0;
 const routeStateKey = "mathSpaceRoute";
 
 function getQuestionTitle(question, index) {
-  return question.slides?.[0]?.title || question.title || `Soal ${index + 1}`;
+  const title =
+    question.slides?.[0]?.title || question.title || `Soal ${index + 1}`;
+  return title
+    .replace(/\s*\(Asesmen \d+, Soal \d+\)/g, "")
+    .replace(/^Soal \d+(?=\s+—)/, `Soal ${index + 1}`);
 }
 
 function createQuestionCard({ question }, index) {

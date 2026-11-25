@@ -11,10 +11,13 @@ function collectSlides(assessment) {
     return slides;
   }
 
+  let questionDisplayNumber = 0;
+
   assessment.sections.forEach((section) => {
     const questions = Array.isArray(section.questions) ? section.questions : [];
 
     questions.forEach((question) => {
+      questionDisplayNumber++;
       const questionSlides = Array.isArray(question.slides)
         ? question.slides
         : [];
@@ -41,6 +44,7 @@ function collectSlides(assessment) {
 
           questionId: question.id,
           questionNumber: question.number,
+          questionDisplayNumber,
           sectionId: section.id,
 
           // Penomoran pembahasan
@@ -93,7 +97,13 @@ function createSlide(slide, index) {
 
   title.className = "presentation-slide__title";
 
-  title.textContent = slide.title || `Slide ${index + 1}`;
+  const slideTitle = slide.title || `Slide ${index + 1}`;
+  title.textContent = slideTitle
+    .replace(/\s*\(Asesmen \d+, Soal \d+\)/g, "")
+    .replace(
+      /^Soal \d+(?=\s+—)/,
+      `Soal ${slide.questionDisplayNumber}`,
+    );
 
   header.appendChild(title);
 

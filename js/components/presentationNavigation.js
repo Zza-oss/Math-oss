@@ -217,8 +217,7 @@ export function initPresentationNavigation(slides, controls) {
         const activeSlide = slides[currentIndex];
         const activeQuestionIndex =
             questionIndexes.get(activeSlide.dataset.questionId) ?? currentIndex;
-        const displayedQuestionNumber =
-            activeSlide.dataset.questionNumber || String(activeQuestionIndex + 1);
+        const displayedQuestionNumber = String(activeQuestionIndex + 1);
         counter.textContent = `Soal ${displayedQuestionNumber} / ${questions.length}`;
 
         // Navigation buttons
